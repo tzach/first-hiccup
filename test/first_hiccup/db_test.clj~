@@ -1,7 +1,0 @@
-(ns first-hiccup.db-test
-  (:use clojure.test
-        first-hiccup.db))
-
-(deftest a-test
-  (testing "FIXME, I fail."
-    (is (= 0 1))))

@@ -1,6 +1,0 @@
-(ns first-hiccup.db
-  (use first-hiccup.db)
-  (:require [clojure.java.jdbc :as sql]))
-
-
-
