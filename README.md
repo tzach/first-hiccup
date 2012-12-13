@@ -1,10 +1,6 @@
 # first-hiccup
 
-A Clojure library designed to ... well, that part is up to you.
-
-## Usage
-
-FIXME
+A Clojure app demonstrating Clojure web stack, with compojure; hiccup; ring; jdbc; postgresql
 
 ## License
 
