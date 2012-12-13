@@ -9,7 +9,8 @@
             [compojure.route :as route]
             [first-hiccup.db :as db]
             [clojure.string :as str]
-            [ring.util.response :as ring]
+            [ring.util.response :as ring-res]
+            [ring.adapter.jetty :as ring-adpt]
             ))
 
 (defn index [req] 
@@ -28,7 +29,7 @@
   (let [shout (:shout params)]
     (when-not (str/blank? shout)
       (db/create shout)))
-  (ring/redirect (map :body "/all")))
+  (ring-res/redirect (map :body "/all")))
 
 (defn all [req]
   (html5
@@ -45,6 +46,15 @@
 
 (def app
   (handler/site app-routes))
+
+(defn start [port]
+  (ring-adpt/run-jetty #'app {:port (or port 8080) :join? false}))
+
+(defn -main []
+  (let [port (Integer. (System/getenv "PORT"))]
+    (start port)))
+
+
 
 ;;(use 'ring.util.serve)
 ;;(serve first-hiccup.core/app)
