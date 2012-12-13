@@ -14,7 +14,7 @@
             ))
 
 (defn index [req] 
-  (html5 [:body [:p "Hello" [:br] [:h1 "World?"]]]))
+  (html5 [:body [:p "Wellcome" [:br] [:h1 "all"]]]))
 
 (defn shout-form []
   (html5
@@ -34,14 +34,19 @@
 (defn all [req]
   (html5
    [:body [:h2 "Shouts:"]
-    (unordered-list (map :body (db/all)))]
+    (unordered-list (map :body (db/all)))
+    [:p (link-to "/shout" "back")]
+    ]
    ))
      
 (defroutes app-routes
-  (GET "/" [] "Hello Tzach World!")
+  (GET "/" [] index)
   (GET "/shout" [] (shout-form))
   (POST "/shout" {params :params} (create params))
   (GET "/all" [] all)
+  (GET "/clear" []
+       (do (db/clear)
+           (ring-res/redirect "/shout")))
   (route/not-found "Not Found"))
 
 (def app
@@ -53,10 +58,3 @@
 (defn -main []
   (let [port (Integer. (System/getenv "PORT"))]
     (start port)))
-
-
-
-;;(use 'ring.util.serve)
-;;(serve first-hiccup.core/app)
-;;(stop-server)
-

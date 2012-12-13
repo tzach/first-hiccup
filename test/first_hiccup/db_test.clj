@@ -4,10 +4,10 @@
   (:require [clojure.java.jdbc :as sql]))
 
 (deftest test-db
-  (testing (sql/with-connection db
+  (testing (sql/with-connection connection
       (is (sql/create-table :testing [:data :text]))
       (is (sql/insert-record :testing {:data "Hello World"}))
-      (is db (sql/insert-records :testing
+      (is (sql/insert-records :testing
                                             {:data "Hello Clojure"}
                                             {:data "Bye Clojure"}))
       (is (sql/with-query-results results
