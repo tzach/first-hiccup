@@ -29,7 +29,7 @@
   (let [shout (:shout params)]
     (when-not (str/blank? shout)
       (db/create shout)))
-  (ring-res/redirect (map :body "/all")))
+  (ring-res/redirect "/all"))
 
 (defn all [req]
   (html5
