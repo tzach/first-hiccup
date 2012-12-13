@@ -3,7 +3,7 @@
   (:require [clojure.java.jdbc :as sql]))
 
 (defn create-shouts []
-  (sql/with-connection db
+  (sql/with-connection connection
     (sql/create-table :shouts
                       [:id :serial "PRIMARY KEY"]
                       [:body :varchar "NOT NULL"]
